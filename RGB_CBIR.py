@@ -8,7 +8,15 @@ Path of Dataset
 # path = os.getcwd()
 # full_path = path + '/DataSet'
 # Images = os.listdir(full_path)
-
+def RGBcompare(image1, image2):
+    vals1 = RGB_MEAN(image1)
+    vals2 = RGB_MEAN(image2)
+    
+    diff = abs(numpy.mean((vals1 - vals2)))
+    if diff < 10:
+        return 1 # IMAGE FOUND
+    else:
+        return 0 # IMAGE NOT FOUND
 
 def RGB_MEAN(image):
     avg_color_per_row = numpy.average(image, axis=0)
@@ -40,3 +48,7 @@ def ImagesRGBData(path):
 # Folder_path= 'DataSet'
 # results = ImagesRGBData(Folder_path)
 # print(results)
+
+# image1 = cv2.imread('DataSet\IMG_4184.JPG')
+# image2 = cv2.imread('DataSet\IMG_4185.JPG')
+# different = RGBcompare(image1, image2)
