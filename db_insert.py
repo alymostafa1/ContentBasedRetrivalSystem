@@ -1,22 +1,23 @@
 import pymysql
 from RGB_CBIR import *
-
+user=input("Enter your MySQL Workbench username (try root): ")
+password=input("Enter password: ")
 try:
     # DATABASE ALREADY EXISTS
     db = pymysql.connect(
         host="localhost",
-        user=input("Enter your MySQL Workbench username (try root): "),
-        password=input("Enter password: "),
-        database="schema",
+        user=user,
+        password=password,
+        database="lamaaa",
     )
    
 except:
     # DATABASE DOESN'T EXIST, CREATE A NEW ONE
-    create_db_query = "CREATE DATABASE schema"
+    create_db_query = "CREATE DATABASE lamaaa"
     db = pymysql.connect(
         host="localhost",
-        user=input("Enter your MySQL Workbench username (try root): "),
-        password=input("Enter password: "),
+        user=user,
+        password=password,
     ).cursor().execute(create_db_query)
     
 cursor = db.cursor()
