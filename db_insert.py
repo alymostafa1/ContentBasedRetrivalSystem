@@ -42,7 +42,7 @@ def create_db(name):
 def insert_images(path, conn):
     c = conn.cursor()
     images = os.listdir(path)
-    for i in range(2,len(images)):
+    for i in range(len(images)):
         img_path = path + "/" + images[i]
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)

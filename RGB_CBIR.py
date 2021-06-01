@@ -45,7 +45,7 @@ def ImagesRGBData(path):
 # print(BGR_Avg_Color) 
 
 
-# Folder_path= 'DataSet'
+# Folder_path= 'DataSet\Images'
 # results = ImagesRGBData(Folder_path)
 # print(results)
 
