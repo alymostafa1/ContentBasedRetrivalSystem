@@ -1,52 +1,45 @@
-import pymysql
+import sqlite3
+import os
 from RGB_CBIR import *
-user=input("Enter your MySQL Workbench username (try root): ")
-password=input("Enter password: ")
-try:
-    # DATABASE ALREADY EXISTS
-    db = pymysql.connect(
-        host="localhost",
-        user=user,
-        password=password,
-        database="lamaaa",
-    )
-   
-except:
-    # DATABASE DOESN'T EXIST, CREATE A NEW ONE
-    create_db_query = "CREATE DATABASE lamaaa"
-    db = pymysql.connect(
-        host="localhost",
-        user=user,
-        password=password,
-    ).cursor().execute(create_db_query)
+
+
+def create_db(name):
+    conn = sqlite3.connect(name)  # You can create a new database by changing the name within the quotes
+    c = conn.cursor() # The database will be saved in the location where your 'py' file is saved
     
-cursor = db.cursor()
-
-# DELETE TABLES IF THEY ALREADY EXIST, TO AVOID DUPLICATES
-cursor.execute("DROP TABLE IF EXISTS CBIR")
-
-# CREATE TABLE CBIR (ID, PATH, AVG_RGB)
-sql = """CREATE TABLE CBIR (
-    id  INT NOT NULL,
-    path  CHAR(100),
-    avg_rgb CHAR(200),
-    PRIMARY KEY (id))"""
-
-cursor.execute(sql)
-
-# DATASET INSERTION
-path = "DataSet"
-images = os.listdir(path)
-for i in range(1,len(images)):
-    img_path = path + "/" + images[i]
-    image = cv2.imread(img_path)
-    avg = RGB_MEAN(image)
+    c.execute("DROP TABLE IF EXISTS IMG")
     
-    # INSERT RECORDS INTO TABLE CBIR
-    sql = "INSERT INTO CBIR(id, path, avg_rgb) VALUES ('%d', '%s', '%s') " % (i, img_path, avg)
-    cursor.execute(sql)
-    db.commit()
+    # Create table - IMG
+    c.execute("""CREATE TABLE IMG (
+        id  INT NOT NULL,
+        path  CHAR(100),
+        avg_rgb CHAR(200),
+        hist CHAR(5000),
+        PRIMARY KEY (id))""")
+    return conn
     
+          
+def insert_images(path, conn):
+    c = conn.cursor()
+    images = os.listdir(path)
+    for i in range(1,len(images)):
+        img_path = path + "/" + images[i]
+        image = cv2.imread(img_path)
+        avg_rgb = RGB_MEAN(image)
+        
+        ### HISTOGRAM FUNCTION RETURNS ARRAY AND ENTERED IN HIST COLUMN ###
+        
+        # INSERT RECORDS INTO TABLE IMG
+        sql = "INSERT INTO IMG(id, path, avg_rgb) VALUES ('%d', '%s', '%s') " % (i, img_path, avg)
+        c.execute(sql)
+        conn.commit()
 
-# disconnect from server
-db.close()
+path = 'DataSet'
+conn = create_db('multimedia.db')
+insert_images(path, conn)
+c = conn.cursor()
+
+# c.execute('SELECT * FROM IMG') 
+# table = c.fetchall()
+# for row in table:
+#     print(row)
