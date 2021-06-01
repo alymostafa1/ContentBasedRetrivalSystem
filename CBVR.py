@@ -41,11 +41,13 @@ def keyframeDetection(source, dest, Thres, verbose=False):
     y = np.array(lastdiffMag)
     base = peakutils.baseline(y, 2)
     indices = peakutils.indexes(y-base, Thres, min_dist=1)
-
+    out = []
     cnt = 1 
     for x in indices:
         cv2.imwrite(os.path.join(keyframePath , 'keyframe'+ str(cnt) +'.jpg'), full_color[x])
         cnt +=1
+        out.append(full_color[x])
     cv2.destroyAllWindows()
+    return np.array(out), keyframePath
     
-keyframeDetection('C:/Users/Aly EL-kady/Desktop/acrobacia.mp4', 'C:/Users/Aly EL-kady/Desktop/Project', 0.5)
+out, keyframePath = keyframeDetection('DataSet/Videos/acrobacia.mp4', 'Project', 0.5)
