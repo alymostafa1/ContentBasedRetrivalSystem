@@ -53,11 +53,10 @@ def insert_images(path, conn):
     c = conn.cursor()
     images = os.listdir(path)
     for i in range(len(images)):
-        img_path = path + "/" + images[i]
+        img_path = path + '\\' + images[i]
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)
         histo = hist_computation(image)
-        histo = histo.reshape(histo.shape[0]*histo.shape[1])
 
         # INSERT RECORDS INTO TABLE IMG
         sql = "INSERT INTO IMG(id, path, avg_rgb, hist_bg) VALUES ('%d', '%s', '%s', '%s') " % (i, img_path, avg_rgb, histo)
@@ -68,8 +67,7 @@ def insert_images(path, conn):
         cntr = 0
         for key,item in histograms.items():
             for val in item:
-                v = np.array(val)
-                hist = v.reshape(v.shape[0]*v.shape[1])
+                hist = np.array(val)
                 sql = "INSERT INTO SLICES(id, img_id, hist) VALUES ('%d', '%s', '%s') " % (cntr, i, hist)
                 c.execute(sql)
                 conn.commit()
@@ -80,7 +78,7 @@ def insert_videos(path, conn):
     c = conn.cursor()
     videos = os.listdir(path)
     for i in range(len(videos)):
-        vid_path = path + "/" + videos[i]
+        vid_path = path + '\\' + videos[i]
         sql = "INSERT INTO VIDEO(id, path) VALUES ('%d', '%s') " % (i, vid_path)
         c.execute(sql)
         conn.commit()
@@ -88,10 +86,9 @@ def insert_videos(path, conn):
         for j in range(len(keyframes)):
             frame_path = os.path.join(keyframePath , 'keyframe'+ str(j+1) +'.jpg')
             avg_rgb = RGB_MEAN(keyframes[j])
+            histo = hist_computation(keyframes[j])
             
-            ### HISTOGRAM FUNCTION RETURNS ARRAY AND ENTERED IN HIST COLUMN ###
-            
-            sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb) VALUES ('%d','%d', '%s', '%s') " % (j, i, frame_path, avg_rgb)
+            sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s', '%s') " % (j, i, frame_path, avg_rgb, histo)
             c.execute(sql)
             conn.commit()
             
@@ -105,7 +102,7 @@ insert_images(path1, conn)
 insert_videos(path2, conn)
 c = conn.cursor()
 
-# c.execute('SELECT * FROM SLICES') 
+# c.execute('SELECT * FROM KEYFRAMES') 
 # table = c.fetchall()
 # for row in table:
 #     print(row)
