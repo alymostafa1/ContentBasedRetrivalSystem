@@ -2,21 +2,16 @@ import cv2
 import os
 import numpy
 
-'''
-Path of Dataset
-'''
-# path = os.getcwd()
-# full_path = path + '/DataSet'
-# Images = os.listdir(full_path)
-def RGBcompare(image1, image2):
-    vals1 = RGB_MEAN(image1)
-    vals2 = RGB_MEAN(image2)
+
+def RGBcompare(vals1, vals2):
+    # vals1 = RGB_MEAN(image1)
+    # vals2 = RGB_MEAN(image2)
     
     diff = abs(numpy.mean((vals1 - vals2)))
     if diff < 10:
-        return 1 # IMAGE FOUND
+        return 1, diff # IMAGE FOUND
     else:
-        return 0 # IMAGE NOT FOUND
+        return 0, diff # IMAGE NOT FOUND
 
 def RGB_MEAN(image):
     avg_color_per_row = numpy.average(image, axis=0)
@@ -36,19 +31,18 @@ def ImagesRGBData(path):
             image_path = path + '/' + img
             image = cv2.imread(image_path)
             BGR_Avg_Color = RGB_MEAN(image) 
-            # results.append(BGR_Avg_Color)
             results[img] = BGR_Avg_Color     
     return results
     
-# image = cv2.imread('DataSet\IMG_0595.JPG')              
+# image = cv2.imread('DataSet\images\IMG_0595.JPG')              
 # BGR_Avg_Color = RGB_MEAN(image)   
 # print(BGR_Avg_Color) 
 
 
-# Folder_path= 'DataSet\Images'
+# Folder_path= 'DataSet\images\\Images'
 # results = ImagesRGBData(Folder_path)
 # print(results)
 
-# image1 = cv2.imread('DataSet\IMG_4184.JPG')
-# image2 = cv2.imread('DataSet\IMG_4185.JPG')
+# image1 = cv2.imread('DataSet\images\\IMG_4184.JPG')
+# image2 = cv2.imread('DataSet\images\\IMG_4185.JPG')
 # different = RGBcompare(image1, image2)

@@ -10,8 +10,7 @@ def Array2String(Array):
     sep=','
     strings=[]
     for element in Array:
-      strings.append(str(element))
-    
+      strings.append(str(element))    
     s=sep.join(strings)
     return(s)
 
@@ -24,8 +23,12 @@ def stringToList(string):
     string=string[1:len(string)-1]
     string=string.replace('  ',' ')
     listRes = list(string.split(" "))
-    if (listRes.count('')>0):  
-      listRes.remove('')
+    for _ in range(listRes.count('')):
+        
+        
+    # if (listRes.count('')>0): 
+        listRes.remove('')
+        
     for element in listRes:
           element_=float(element)
           p.append(element_)  

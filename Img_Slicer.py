@@ -37,12 +37,13 @@ def sliceImage_Vect(Image_path,divisions):
     #     cv2.imwrite(new_image_path, img[i]) 
     return img
 
-def SliceImage_X_Vect(Image_path,divisions):
+def SliceImage_X_Vect(image_input,divisions):
     
     '''
     Original img
     '''
-    img = cv2.imread(Image_path)
+    # img = cv2.imread(Image_path)
+    img = image_input
     height = img.shape[0]
     width = img.shape[1]
     
@@ -79,20 +80,21 @@ Test for Image Slicer
 Test for Hist computation for sliced images
 '''
 
-def Slicer_hist(Image_path,divisions):
+def Slicer_hist(image_input,divisions):
     Dict = {}
     image_hist = []
-    images = SliceImage_X_Vect(Image_path,divisions)
+    images = SliceImage_X_Vect(image_input,divisions)
     
     for image in images: 
         image_hist.append(hist_computation(image))
         
-    Dict[Image_path] = image_hist           
-    return Dict
+           
+    return image_hist
 
 # divisions= 16
 # path="DataSet\Images\image.jpg"
-# Image_Hists = Slicer_hist(path,divisions)
+# image = cv2.imread(path)
+# Image_Hists = Slicer_hist(image,divisions)
         
         
     

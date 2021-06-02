@@ -39,9 +39,9 @@ def Compare_Histo(hist_base, hist_test1):  # Function that compares the histogra
 
     base_test1 = cv.compareHist(hist_base, hist_test1, 0)
     if base_test1 >= 0.75:  # if similarity greater than or equal 0.75 then put the test image in the SimilarImages array
-        return 1
+        return 1, base_test1
     else:
-        return 0
+        return 0, base_test1
 
 
 def main():     #Made for testing the algorithm
