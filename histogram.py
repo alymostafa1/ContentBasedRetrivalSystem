@@ -9,8 +9,8 @@ similarImages = []  # Images that have similar histogram to the source image
 histvalues = []   #Array having the histogram values of all images in database
 
 
-def Read_All_Images():  # Function to read all images in a folder to simulate a database
-    imagePaths = list(paths.list_images("C:/Users/Mohamed-PC/Desktop/PARROTFISH"))
+def Read_All_Images(path):  # Function to read all images in a folder to simulate a database
+    imagePaths = list(paths.list_images(path))
     for imagePath in imagePaths:
         image = cv2.imread(imagePath)
         Allimages.append(image)
@@ -44,14 +44,13 @@ def Compare_Histo(hist_base, hist_test1):  # Function that compares the histogra
         return 0
 
 
-
 def main():     #Made for testing the algorithm
     src = cv2.imread("C:/Users/Aly EL-kady/Desktop/image.JPG")  #source image that we need to find similar images to it
-#     Allimages = Read_All_Images()
+#     Allimages = Read_All_Images('DataSet/Images')
     histsrc = hist_computation(src)
 
-#     for image in Allimages:  # loop to compare all images in the dataset with the source image
-#         histvalues.append(hist_computation(image))
+     # for image in Allimages:  # loop to compare all images in the dataset with the source image
+     #    histvalues.append(hist_computation(image))
 
 
 #     for x in range(0,len(histvalues)):      #Function to compare the histogram source image with all hisgrams of images in the dataset

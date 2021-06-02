@@ -2,13 +2,15 @@ import sqlite3
 import os
 from RGB_CBIR import *
 from CBVR import *
-
+from histogram import *
+from Img_Slicer import *
 
 def create_db(name):
     conn = sqlite3.connect(name)  # You can create a new database by changing the name within the quotes
     c = conn.cursor() # The database will be saved in the location where your 'py' file is saved
     
     c.execute("DROP TABLE IF EXISTS IMG")
+    c.execute("DROP TABLE IF EXISTS SLICES")
     c.execute("DROP TABLE IF EXISTS VIDEO")
     c.execute("DROP TABLE IF EXISTS KEYFRAMES")
     
@@ -17,8 +19,16 @@ def create_db(name):
         id  INT NOT NULL,
         path  CHAR(100),
         avg_rgb CHAR(200),
-        hist CHAR(5000),
+        hist_bg CHAR(10000),
         PRIMARY KEY (id))""")
+    
+    # Create table - slices
+    c.execute("""CREATE TABLE SLICES (
+        id  INT NOT NULL,
+        img_id INT NOT NULL,
+        hist CHAR(5000),
+        PRIMARY KEY (id, img_id)
+        FOREIGN KEY (img_id) REFERENCES IMG(id) ON UPDATE CASCADE ON DELETE CASCADE)""")
     
     # Create table - VIDEO
     c.execute("""CREATE TABLE VIDEO (
@@ -32,7 +42,7 @@ def create_db(name):
         vid_id INT NOT NULL,
         path CHAR(100),
         avg_rgb CHAR(200),
-        hist CHAR(5000),
+        hist_bg CHAR(5000),
         PRIMARY KEY (id, vid_id),
         FOREIGN KEY (vid_id) REFERENCES VIDEO(id) ON UPDATE CASCADE ON DELETE CASCADE)""")
     
@@ -46,13 +56,25 @@ def insert_images(path, conn):
         img_path = path + "/" + images[i]
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)
-        
-        ### HISTOGRAM FUNCTION RETURNS ARRAY AND ENTERED IN HIST COLUMN ###
-        
+        histo = hist_computation(image)
+        histo = histo.reshape(histo.shape[0]*histo.shape[1])
+
         # INSERT RECORDS INTO TABLE IMG
-        sql = "INSERT INTO IMG(id, path, avg_rgb) VALUES ('%d', '%s', '%s') " % (i, img_path, avg_rgb)
+        sql = "INSERT INTO IMG(id, path, avg_rgb, hist_bg) VALUES ('%d', '%s', '%s', '%s') " % (i, img_path, avg_rgb, histo)
         c.execute(sql)
         conn.commit()
+        
+        histograms = Slicer_hist(img_path,16)
+        cntr = 0
+        for key,item in histograms.items():
+            for val in item:
+                v = np.array(val)
+                hist = v.reshape(v.shape[0]*v.shape[1])
+                sql = "INSERT INTO SLICES(id, img_id, hist) VALUES ('%d', '%s', '%s') " % (cntr, i, hist)
+                c.execute(sql)
+                conn.commit()
+                cntr += 1
+            
 
 def insert_videos(path, conn):
     c = conn.cursor()
@@ -83,7 +105,7 @@ insert_images(path1, conn)
 insert_videos(path2, conn)
 c = conn.cursor()
 
-# c.execute('SELECT * FROM VIDEO') 
+# c.execute('SELECT * FROM SLICES') 
 # table = c.fetchall()
 # for row in table:
 #     print(row)
