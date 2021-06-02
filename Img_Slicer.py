@@ -1,6 +1,9 @@
 import cv2  
 import numpy as np
 
+
+from histogram import *
+
 def sliceImage(Image_path,divisions):
 
     '''
@@ -26,14 +29,34 @@ def sliceImage(Image_path,divisions):
     for arr in pre_img:
         img.extend(np.split(arr, arr.shape[1]/(new_width), axis=1))
         
-    for i in range(len(img)):
-        new_image_path = "Image" + str(i)  + '.jpg'
-        cv2.imwrite(new_image_path, img[i]) 
-    
-
-
+    # for i in range(len(img)):
+    #     new_image_path = "Image" + str(i)  + '.jpg'
+    #     cv2.imwrite(new_image_path, img[i]) 
     return img
 
-divisions= 16
-path="image.jpg"
-sliced_img = sliceImage(path,divisions)
+
+
+# divisions= 16
+# path="image.jpg"
+# sliced_img = sliceImage(path,divisions)
+
+def Slicer_hist(Image_path,divisions):
+    Dict = {}
+    image_hist = []
+    images = sliceImage(Image_path,divisions)
+    
+    for image in images: 
+        image_hist.append(hist_computation(image))
+        
+    Dict[Image_path] = image_hist           
+    return Dict
+
+# divisions= 16
+# path="DataSet\Images\image.jpg"
+# Image_Hist = Slicer_hist(path,divisions)
+        
+        
+    
+    
+    
+
