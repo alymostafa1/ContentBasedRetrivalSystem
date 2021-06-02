@@ -18,7 +18,7 @@ def Read_All_Images():  # Function to read all images in a folder to simulate a 
     return Allimages  # Array containing all images in the database
 
 
-def hist_computaion(image):    #Function to calcualte the histogram of given image
+def hist_computation(image):    #Function to calcualte the histogram of given image
     hsv_base = cv.cvtColor(image, cv.COLOR_BGR2HSV)
     h_bins = 50
     s_bins = 60
@@ -47,10 +47,10 @@ def Compare_Histo(hist_base, hist_test1):  # Function that compares the histogra
 def main():     #Made for testing the algorithm
     src = cv2.imread("C:/Users/Mohamed-PC/Desktop/PARROTFISH/DATA04PARROT.jpg")  #source image that we need to find similar images to it
     Allimages = Read_All_Images()
-    histsrc = hist_computaion(src)
+    histsrc = hist_computation(src)
 
     for image in Allimages:  # loop to compare all images in the dataset with the source image
-        histvalues.append(hist_computaion(image))
+        histvalues.append(hist_computation(image))
 
 
     for x in range(0,len(histvalues)):      #Function to compare the histogram source image with all hisgrams of images in the dataset
