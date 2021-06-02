@@ -11,18 +11,18 @@ from RGB_CBIR import *
 
 def search (path2,conn,method):
     # TODO: ADD OTHER IF COND. FOR METHODS
+    diffL=[]
     c=conn.cursor()
     c.execute("SELECT * FROM IMG")
     table=c.fetchall()
-    #img_paths=[]   #law hanrg3 akter men soraa
     image2 = cv2.imread(path2)
     if (method=="RGB_MEAN"):
         vals2 = RGB_MEAN(image2) 
     for i in range(len(table)):
       vals1=stringToList(table[i][2])
       diff = abs(numpy.mean((vals1 - vals2)))
-      if (diff<1 and diff>0.1):
-          #img_paths.append(table[i][1])  #law hanrg3 akter men sora
+      diffL.append(diff)
+      if(min(diffL)):
           img_path=table[i][1]
  
     return img_path 
