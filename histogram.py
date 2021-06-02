@@ -19,7 +19,7 @@ def Read_All_Images():  # Function to read all images in a folder to simulate a 
 
 
 def hist_computation(image):    #Function to calcualte the histogram of given image    
-    image = cv.cvtColor(image, cv.COLOR_GRAY2BGR)
+
     hsv_base = cv.cvtColor(image, cv.COLOR_BGR2HSV)
     h_bins = 50
     s_bins = 60
