@@ -68,9 +68,16 @@ def SliceImage_X_Vect(Image_path,divisions):
         
     return _img
 
+'''
+Test for Image Slicer
+'''
 # divisions= 16
 # path="image.jpg"
 # sliced_img = sliceImage(path,divisions)
+
+'''
+Test for Hist computation for sliced images
+'''
 
 def Slicer_hist(Image_path,divisions):
     Dict = {}
@@ -83,9 +90,9 @@ def Slicer_hist(Image_path,divisions):
     Dict[Image_path] = image_hist           
     return Dict
 
-divisions= 16
-path="DataSet\Images\image.jpg"
-Image_Hists = Slicer_hist(path,divisions)
+# divisions= 16
+# path="DataSet\Images\image.jpg"
+# Image_Hists = Slicer_hist(path,divisions)
         
         
     
