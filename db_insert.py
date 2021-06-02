@@ -4,6 +4,7 @@ from RGB_CBIR import *
 from CBVR import *
 from histogram import *
 from Img_Slicer import *
+from helper_Function import *
 
 def create_db(name):
     conn = sqlite3.connect(name)  # You can create a new database by changing the name within the quotes
@@ -19,14 +20,14 @@ def create_db(name):
         id  INT NOT NULL,
         path  CHAR(100),
         avg_rgb CHAR(200),
-        hist_bg CHAR(10000),
+        hist_bg CHAR(30000),
         PRIMARY KEY (id))""")
     
     # Create table - slices
     c.execute("""CREATE TABLE SLICES (
         id  INT NOT NULL,
         img_id INT NOT NULL,
-        hist CHAR(5000),
+        hist CHAR(30000),
         PRIMARY KEY (id, img_id)
         FOREIGN KEY (img_id) REFERENCES IMG(id) ON UPDATE CASCADE ON DELETE CASCADE)""")
     
@@ -42,7 +43,7 @@ def create_db(name):
         vid_id INT NOT NULL,
         path CHAR(100),
         avg_rgb CHAR(200),
-        hist_bg CHAR(5000),
+        hist_bg CHAR(30000),
         PRIMARY KEY (id, vid_id),
         FOREIGN KEY (vid_id) REFERENCES VIDEO(id) ON UPDATE CASCADE ON DELETE CASCADE)""")
     
@@ -57,9 +58,9 @@ def insert_images(path, conn):
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)
         histo = hist_computation(image)
-
+        str_hist = Array2String(histo)
         # INSERT RECORDS INTO TABLE IMG
-        sql = "INSERT INTO IMG(id, path, avg_rgb, hist_bg) VALUES ('%d', '%s', '%s', '%s') " % (i, img_path, avg_rgb, histo)
+        sql = "INSERT INTO IMG(id, path, avg_rgb, hist_bg) VALUES ('%d', '%s', '%s', '%s') " % (i, img_path, avg_rgb, str_hist)
         c.execute(sql)
         conn.commit()
         
@@ -68,7 +69,8 @@ def insert_images(path, conn):
         for key,item in histograms.items():
             for val in item:
                 hist = np.array(val)
-                sql = "INSERT INTO SLICES(id, img_id, hist) VALUES ('%d', '%s', '%s') " % (cntr, i, hist)
+                str_hist = Array2String(hist)
+                sql = "INSERT INTO SLICES(id, img_id, hist) VALUES ('%d', '%s', '%s') " % (cntr, i, str_hist)
                 c.execute(sql)
                 conn.commit()
                 cntr += 1
@@ -87,8 +89,8 @@ def insert_videos(path, conn):
             frame_path = os.path.join(keyframePath , 'keyframe'+ str(j+1) +'.jpg')
             avg_rgb = RGB_MEAN(keyframes[j])
             histo = hist_computation(keyframes[j])
-            
-            sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s', '%s') " % (j, i, frame_path, avg_rgb, histo)
+            str_hist = Array2String(histo)
+            sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s', '%s') " % (j, i, frame_path, avg_rgb, str_hist)
             c.execute(sql)
             conn.commit()
             
@@ -102,7 +104,7 @@ insert_images(path1, conn)
 insert_videos(path2, conn)
 c = conn.cursor()
 
-# c.execute('SELECT * FROM KEYFRAMES') 
-# table = c.fetchall()
-# for row in table:
-#     print(row)
+c.execute('SELECT * FROM SLICES') 
+table = c.fetchall()
+for row in table:
+    print(row)
