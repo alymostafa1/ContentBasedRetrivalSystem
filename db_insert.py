@@ -97,16 +97,17 @@ def insert_videos(path, conn):
             conn.commit()
             
 
-path1 = 'DataSet/Images'
-path2 = 'DataSet/Videos'
+# path1 = 'DataSet/Images'
+# path2 = 'DataSet/Videos'
 
-conn = create_db('multimedia.db')
+# conn = create_db('multimedia.db')
 
-insert_images(path1, conn)
-insert_videos(path2, conn)
-# c = conn.cursor()
+# insert_images(path1, conn)
+# insert_videos(path2, conn)
+conn=sqlite3.connect("multimedia.db")
+c = conn.cursor()
 
-# c.execute('SELECT * FROM IMG') 
-# table = c.fetchall()
-# for row in table:
-#     print(row)
+c.execute('SELECT * FROM KEYFRAMES') 
+table = c.fetchall()
+for row in table:
+    print(row)
