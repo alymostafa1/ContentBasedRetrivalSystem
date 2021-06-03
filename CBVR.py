@@ -5,11 +5,11 @@ import numpy as np
 import time
 import peakutils
 
-def keyframeDetection(source, dest, Thres, verbose=False):
+def keyframeDetection(source, Thres, verbose=False):
     
-    keyframePath = dest +'/keyFrames'
-    if not os.path.exists(keyframePath):
-            os.makedirs(keyframePath)
+    # keyframePath = dest +'/keyFrames'
+    # if not os.path.exists(keyframePath):
+    #         os.makedirs(keyframePath)
 
     cap = cv2.VideoCapture(source)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -48,6 +48,6 @@ def keyframeDetection(source, dest, Thres, verbose=False):
         cnt +=1
         out.append(full_color[x])
     cv2.destroyAllWindows()
-    return np.array(out), keyframePath
+    return np.array(out)
     
-out, keyframePath = keyframeDetection('DataSet/Videos/acrobacia.mp4', 'Project', 0.5)
+out = keyframeDetection('DataSet/Videos/acrobacia.mp4', 0.5)

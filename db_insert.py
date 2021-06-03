@@ -23,7 +23,7 @@ def create_db(name):
         hist_bg CHAR(30000),
         PRIMARY KEY (id))""")
     
-    # Create table - slices
+    # Create table - SLICES
     c.execute("""CREATE TABLE SLICES (
         id  INT NOT NULL,
         img_id INT NOT NULL,
@@ -41,7 +41,6 @@ def create_db(name):
     c.execute("""CREATE TABLE KEYFRAMES (
         id INT NOT NULL,
         vid_id INT NOT NULL,
-        path CHAR(100),
         avg_rgb CHAR(200),
         hist_bg CHAR(30000),
         PRIMARY KEY (id, vid_id),
@@ -85,14 +84,13 @@ def insert_videos(path, conn):
         sql = "INSERT INTO VIDEO(id, path) VALUES ('%d', '%s') " % (i, vid_path)
         c.execute(sql)
         conn.commit()
-        keyframes, keyframePath = keyframeDetection(vid_path, 'Project', 0.5)
+        keyframes = keyframeDetection(vid_path, 0.5)
         for j in range(len(keyframes)):
-            frame_path = os.path.join(keyframePath , 'keyframe'+ str(j+1) +'.jpg')
             avg_rgb = RGB_MEAN(keyframes[j])
             histo = hist_computation(keyframes[j])
             # str_hist = Array2String(histo)
             str_hist = histo
-            sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s', '%s') " % (j, i, frame_path, avg_rgb, str_hist)
+            sql = "INSERT INTO KEYFRAMES(id, vid_id, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s') " % (j, i, avg_rgb, str_hist)
             c.execute(sql)
             conn.commit()
             
@@ -104,10 +102,9 @@ def insert_videos(path, conn):
 
 # insert_images(path1, conn)
 # insert_videos(path2, conn)
-conn=sqlite3.connect("multimedia.db")
-c = conn.cursor()
+# c = conn.cursor()
 
-c.execute('SELECT * FROM KEYFRAMES') 
-table = c.fetchall()
-for row in table:
-    print(row)
+# c.execute('SELECT * FROM KEYFRAMES') 
+# table = c.fetchall()
+# for row in table:
+#     print(row)
