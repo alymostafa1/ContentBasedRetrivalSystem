@@ -12,11 +12,8 @@ def hist_computation(image):
 def Compare_Histo(hist_1, hist_2):
     minima = np.minimum(hist_1, hist_2)
     intersection = np.true_divide(np.sum(minima), np.sum(hist_2))
-    
-    if intersection > 0.98 and intersection <= 1: 
-        return 1, intersection
-    else:
-        return 1, intersection        
+
+    return intersection        
     
     
 # path = "DataSet/images/IMG_2866.jpg"
