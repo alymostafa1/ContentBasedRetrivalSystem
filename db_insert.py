@@ -90,7 +90,8 @@ def insert_videos(path, conn):
             frame_path = os.path.join(keyframePath , 'keyframe'+ str(j+1) +'.jpg')
             avg_rgb = RGB_MEAN(keyframes[j])
             histo = hist_computation(keyframes[j])
-            str_hist = Array2String(histo)
+            # str_hist = Array2String(histo)
+            str_hist = histo
             sql = "INSERT INTO KEYFRAMES(id, vid_id, path, avg_rgb, hist_bg) VALUES ('%d','%d', '%s', '%s', '%s') " % (j, i, frame_path, avg_rgb, str_hist)
             c.execute(sql)
             conn.commit()
@@ -102,7 +103,7 @@ path2 = 'DataSet/Videos'
 conn = create_db('multimedia.db')
 
 insert_images(path1, conn)
-# # insert_videos(path2, conn)
+insert_videos(path2, conn)
 # c = conn.cursor()
 
 # c.execute('SELECT * FROM IMG') 

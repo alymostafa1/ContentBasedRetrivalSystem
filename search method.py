@@ -41,8 +41,7 @@ def ImageSearch (path,conn,method):
         vals2 = hist_computation(image)
     elif method == "SLiced-Histogram":
         vals2 = Slicer_hist(image,divisions = 16)
-        
-        
+
     for i, val in enumerate(vals1):
         if method == "RGB_MEAN":
             Val, diff = RGBcompare(val , vals2)
