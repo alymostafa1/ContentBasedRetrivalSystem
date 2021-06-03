@@ -82,12 +82,12 @@ def ImageSearch (path,conn,method):
     return img_path
 
 
-path=r'C:\Users\Aly EL-kady\Desktop\IMG_4161.jpg'
+# path=r'C:\Users\Aly EL-kady\Desktop\IMG_4161.jpg'
 
-conn=sqlite3.connect("multimedia.db")
-print(ImageSearch(path,conn,"SLiced-Histogram")) 
-print(ImageSearch(path,conn,"Histogram")) 
-print(ImageSearch(path,conn,"RGB_MEAN")) 
+# conn=sqlite3.connect("multimedia.db")
+# print(ImageSearch(path,conn,"SLiced-Histogram")) 
+# print(ImageSearch(path,conn,"Histogram")) 
+# print(ImageSearch(path,conn,"RGB_MEAN")) 
 #c=conn.cursor()
 #c.execute("SELECT * FROM IMGG")
 # table=c.fetchall()
