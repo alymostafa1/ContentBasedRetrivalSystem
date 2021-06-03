@@ -53,7 +53,7 @@ def insert_images(path, conn):
     c = conn.cursor()
     images = os.listdir(path)
     for i in range(len(images)):
-        img_path = path + '\\' + images[i]
+        img_path = path + '//' + images[i]
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)
         histo = hist_computation(image)
@@ -95,16 +95,17 @@ def insert_videos(path, conn):
             conn.commit()
             
 
-path1 = 'DataSet/Images'
-path2 = 'DataSet/Videos'
+#path1 = 'DataSet/Images'
+#path2 ='D:\ContentBasedRetrivalSystem\DataSet\Videos'
 
-conn = create_db('multimedia.db')
+#conn = create_db('multimedia.db')
 
-insert_images(path1, conn)
-insert_videos(path2, conn)
-c = conn.cursor()
+#insert_images(path1, conn)
+#conn=sqlite3.connect("multimedia.db")
+#insert_videos(path2, conn)
+#c = conn.cursor()
 
-# c.execute('SELECT * FROM KEYFRAMES') 
-# table = c.fetchall()
-# for row in table:
-#     print(row)
+#c.execute('SELECT * FROM VIDEO') 
+#table = c.fetchall()
+#for row in table:
+ #   print(row)

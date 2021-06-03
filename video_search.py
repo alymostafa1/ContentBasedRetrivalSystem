@@ -9,11 +9,11 @@ from Img_Ret import *
 def video_search(path,conn,method):
     ##input keyframes
     c= conn.cursor()
-    c.execute("SELECT count(*) FROM VIDEO")
+    c.execute("SELECT * FROM VIDEO")
     numOfvideos = len(c.fetchall())
     in_keyframes= keyframeDetection(path,0.5)
     
-    if (method=="RGB_MEAN"):
+    if method=="RGB_MEAN":
         in_avg_rgb=np.zeros((len(in_keyframes),3))
         diff=np.zeros((numOfvideos,1))
         for i in range(len(in_keyframes)):
@@ -66,9 +66,9 @@ def video_search(path,conn,method):
         #c.execute(sql) 
         #rows = c.fetchall()
 
-# path1='D:/ContentBasedRetrivalSystem/DataSet/Videos/acrobacia.mp4'
-# conn=sqlite3.connect("multimedia.db")
-# c= conn.cursor()
-# videopath=video_search(path1,conn,"HIST")
-# print(videopath)
+path1='D:/ContentBasedRetrivalSystem/DataSet/Videos/skating.mp4'
+conn=sqlite3.connect("multimedia.db")
+c= conn.cursor()
+videopath=video_search(path1,conn,"HIST")
+print(videopath)
         
