@@ -67,31 +67,23 @@ def ImageSearch (path,conn,method):
             if (diff > max(diffL_2)):
                     diffL_2.append(diff)
                     img_path = table_img[i][1]
-                    
-                    
-                    
+
         if method=="SLiced-Histogram":
             summ=0
             for j in range (0,16):
                 diff = Compare_Histo(val[j], vals2[j])
-                summ+=diff
-                
+                summ+=diff                
             summ=summ/16
             diffL_3.append(summ)
-    if (method=="SLiced-Histogram"):
-        
+    if (method=="SLiced-Histogram"):        
         Max_index=diffL_3.index(max(diffL_3))
         img_path=table_img[Max_index][1]
     
     return img_path
 
 
-            
-            
-                
-    
+path=r'C:\Users\Aly EL-kady\Desktop\IMG_4161.jpg'
 
-path=r'E:\4th CSE\2nd Term\MM\DataSet\Images\image.JPG'
 conn=sqlite3.connect("multimedia.db")
 print(ImageSearch(path,conn,"SLiced-Histogram")) 
 print(ImageSearch(path,conn,"Histogram")) 

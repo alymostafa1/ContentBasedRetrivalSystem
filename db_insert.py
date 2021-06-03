@@ -95,14 +95,14 @@ def insert_videos(path, conn):
             conn.commit()
             
 
-# path1 = 'DataSet/Images'
-# path2 = 'DataSet/Videos'
+path1 = 'DataSet/Images'
+path2 = 'DataSet/Videos'
 
-# conn = create_db('multimedia.db')
+conn = create_db('multimedia.db')
 
-# insert_images(path1, conn)
-# insert_videos(path2, conn)
-# c = conn.cursor()
+insert_images(path1, conn)
+insert_videos(path2, conn)
+c = conn.cursor()
 
 # c.execute('SELECT * FROM KEYFRAMES') 
 # table = c.fetchall()
