@@ -2,7 +2,7 @@ import sqlite3
 import os
 from RGB_CBIR import *
 from CBVR import *
-from histogram import *
+from Img_Ret import * # Histo Agent 007
 from Img_Slicer import *
 from helper_Function import *
 
@@ -58,18 +58,19 @@ def insert_images(path, conn):
         image = cv2.imread(img_path)
         avg_rgb = RGB_MEAN(image)
         histo = hist_computation(image)
-        str_hist = Array2String(histo)
+        str_hist = histo
+        # str_hist = Array2String(histo)
         # INSERT RECORDS INTO TABLE IMG
         sql = "INSERT INTO IMG(id, path, avg_rgb, hist_bg) VALUES ('%d', '%s', '%s', '%s') " % (i, img_path, avg_rgb, str_hist)
         c.execute(sql)
         conn.commit()
         
-        histograms = Slicer_hist(img_path,16)
+        histograms = Slicer_hist(image,16)
         cntr = 0
-        for key,item in histograms.items():
-            for val in item:
-                hist = np.array(val)
-                str_hist = Array2String(hist)
+        for item in histograms:            
+                hist = np.array(item)
+                str_hist = hist
+                # str_hist = Array2String(hist)
                 sql = "INSERT INTO SLICES(id, img_id, hist) VALUES ('%d', '%s', '%s') " % (cntr, i, str_hist)
                 c.execute(sql)
                 conn.commit()
@@ -101,10 +102,10 @@ path2 = 'DataSet/Videos'
 conn = create_db('multimedia.db')
 
 insert_images(path1, conn)
-insert_videos(path2, conn)
-c = conn.cursor()
+# # insert_videos(path2, conn)
+# c = conn.cursor()
 
-c.execute('SELECT * FROM SLICES') 
-table = c.fetchall()
-for row in table:
-    print(row)
+# c.execute('SELECT * FROM IMG') 
+# table = c.fetchall()
+# for row in table:
+#     print(row)

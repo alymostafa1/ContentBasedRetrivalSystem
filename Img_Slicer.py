@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 
 
-from histogram import *
+# from histogram import *
+from Img_Ret import *
 
 def sliceImage_Vect(Image_path,divisions):
 

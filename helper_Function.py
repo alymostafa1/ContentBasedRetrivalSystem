@@ -7,7 +7,7 @@ Created on Tue Jun  1 16:06:38 2021
 import math
 
 def Array2String(Array):
-    sep=','
+    sep=' '
     strings=[]
     for element in Array:
       strings.append(str(element))    
@@ -23,10 +23,7 @@ def stringToList(string):
     string=string[1:len(string)-1]
     string=string.replace('  ',' ')
     listRes = list(string.split(" "))
-    for _ in range(listRes.count('')):
-        
-        
-    # if (listRes.count('')>0): 
+    for _ in range(listRes.count('')):        
         listRes.remove('')
         
     for element in listRes:
