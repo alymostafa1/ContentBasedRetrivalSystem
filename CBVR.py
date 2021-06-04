@@ -4,7 +4,27 @@ import csv
 import numpy as np
 import time
 import peakutils
+import matplotlib.pyplot as plt
 
+def print_diff(Array_1, Array_2):
+    plt.subplot(311)
+    plt.title('Original', fontsize=10)
+    ax = plt.gca()
+    ax.set_facecolor('xkcd:salmon')
+    plt.plot(Array_1 , 'r')
+    
+    plt.subplot(312)
+    plt.title('Base-Line removal',fontsize = 10 )
+    ax = plt.gca()
+    ax.set_facecolor('xkcd:sky blue')
+    plt.plot(Array_2 , 'b')
+
+    plt.subplot(313)
+    plt.title('Diff', fontsize=10)
+    ax = plt.gca()
+    ax.set_facecolor('tab:olive')
+    plt.plot((Array_1 - Array_2), 'g')  
+    
 def keyframeDetection(source, Thres, verbose=False):
     
     # keyframePath = dest +'/keyFrames'
@@ -40,9 +60,10 @@ def keyframeDetection(source, Thres, verbose=False):
     cap.release()
     y = np.array(lastdiffMag)
     base = peakutils.baseline(y, 2)
-    indices = peakutils.indexes(y-base, Thres, min_dist=1)
+    indices = peakutils.indexes(y, Thres, min_dist=1)
     out = []
     cnt = 1 
+    # print_diff(y, base)
     for x in indices:
         # cv2.imwrite(os.path.join(keyframePath , 'keyframe'+ str(cnt) +'.jpg'), full_color[x])
         cnt +=1
