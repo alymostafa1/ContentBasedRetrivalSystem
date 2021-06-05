@@ -20,7 +20,7 @@ def video_search(path,conn,method):
             in_avg_rgb[i] = RGB_MEAN(in_keyframes[i]) ############rgb input video
             
         for i in range(numOfvideos):
-            sql ="SELECT avg_rgb FROM KEYFRAMES as KF INNER JOIN VIDEO as V ON KF.vid_id=V.id AND V.id='%d'"% (i)
+            sql ="SELECT avg_rgb FROM KEYFRAMES as KF INNER JOIN VIDEO as V ON KF.vid_id=V.id AND V.id='%d'"% (i+1)
             c.execute(sql)
             t= c.fetchall()
             db_avg_rgb=np.zeros((len(t),3))
@@ -45,7 +45,7 @@ def video_search(path,conn,method):
             in_histo[i] = hist_computation(in_keyframes[i]) ############hist input video
             
         for i in range(numOfvideos):
-            sql ="SELECT hist_bg FROM KEYFRAMES as KF INNER JOIN VIDEO as V ON KF.vid_id=V.id AND V.id='%d'"% (i)
+            sql ="SELECT hist_bg FROM KEYFRAMES as KF INNER JOIN VIDEO as V ON KF.vid_id=V.id AND V.id='%d'"% (i+1)
             c.execute(sql)
             t= c.fetchall()
             db_histo=np.zeros((len(t),256))
@@ -66,9 +66,9 @@ def video_search(path,conn,method):
         #c.execute(sql) 
         #rows = c.fetchall()
 
-path1='D:/ContentBasedRetrivalSystem/DataSet/Videos/skating.mp4'
+path1='DataSet/Videos/acrobacia.mp4'
 conn=sqlite3.connect("multimedia.db")
-c= conn.cursor()
-videopath=video_search(path1,conn,"HIST")
+#c= conn.cursor()
+videopath=video_search(path1,conn,"RGB_MEAN")
 print(videopath)
         
