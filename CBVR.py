@@ -25,7 +25,7 @@ def print_diff(Array_1, Array_2):
     ax.set_facecolor('tab:olive')
     plt.plot((Array_1 - Array_2), 'g')  
     
-def keyframeDetection(source, Thres, verbose=False):
+def keyframeDetection(source, Thres):
     
     # keyframePath = dest +'/keyFrames'
     # if not os.path.exists(keyframePath):
@@ -34,10 +34,7 @@ def keyframeDetection(source, Thres, verbose=False):
     cap = cv2.VideoCapture(source)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
   
-    if (cap.isOpened()== False):
-        print("Error opening video file")
 
-    lastfrm = []
     lastdiffMag = []
     full_color = []
     lastFrame = None
@@ -45,17 +42,16 @@ def keyframeDetection(source, Thres, verbose=False):
     # Read until video is completed
     for i in range(length):
         ret, frame = cap.read()
-        blur_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        blur = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         frame_number = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1
-        lastfrm.append(frame_number)
         full_color.append(frame)
         if frame_number == 0:
-            lastFrame = blur_gray
+            lastFrame = blur
 
-        diff = cv2.subtract(blur_gray, lastFrame)
-        diffMag = cv2.countNonZero(diff)
-        lastdiffMag.append(diffMag)
-        lastFrame = blur_gray
+        _diff = cv2.subtract(blur, lastFrame)
+        diff_Num = cv2.countNonZero(_diff)
+        lastdiffMag.append(diff_Num)
+        lastFrame = blur
 
     cap.release()
     y = np.array(lastdiffMag)
@@ -65,7 +61,7 @@ def keyframeDetection(source, Thres, verbose=False):
     cnt = 1 
     # print_diff(y, base)
     for x in indices:
-        # cv2.imwrite(os.path.join(keyframePath , 'keyframe'+ str(cnt) +'.jpg'), full_color[x])
+        # cv2.imwrite(os.path.join('DataSet/Videos', 'keyframe'+ str(cnt) +'.jpg'), full_color[x])
         cnt +=1
         out.append(full_color[x])
     cv2.destroyAllWindows()
