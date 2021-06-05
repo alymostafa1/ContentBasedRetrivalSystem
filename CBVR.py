@@ -60,7 +60,7 @@ def keyframeDetection(source, Thres, verbose=False):
     cap.release()
     y = np.array(lastdiffMag)
     base = peakutils.baseline(y, 2)
-    indices = peakutils.indexes(y, Thres, min_dist=1)
+    indices = peakutils.indexes(y - base, Thres, min_dist=1)
     out = []
     cnt = 1 
     # print_diff(y, base)

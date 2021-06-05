@@ -29,7 +29,6 @@ def TableRetrieve(method, table1,table2):
 
 
 def ImageSearch (path,conn,method):
-    # TODO: ADD OTHER IF COND. FOR METHODS
 
     diffL=[10000]    
     diffL_2=[0]  
@@ -53,7 +52,7 @@ def ImageSearch (path,conn,method):
         vals2 = hist_computation(image)
     elif method == "SLiced-Histogram":
         vals2 = Slicer_hist(image,divisions = 16)
-
+        
     for i, val in enumerate(vals1):
         if method == "RGB_MEAN":
             Val, diff = RGBcompare(val , vals2)
@@ -67,7 +66,7 @@ def ImageSearch (path,conn,method):
             if (diff > max(diffL_2)):
                     diffL_2.append(diff)
                     img_path = table_img[i][1]
-
+                    
         if method=="SLiced-Histogram":
             summ=0
             for j in range (0,16):
