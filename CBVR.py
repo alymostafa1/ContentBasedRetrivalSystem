@@ -30,15 +30,15 @@ def keyframeDetection(source, Thres):
     # keyframePath = dest +'/keyFrames'
     # if not os.path.exists(keyframePath):
     #         os.makedirs(keyframePath)
+    
+    lastdiffMag = []
+    full_color = []
+    lastFrame = None
 
     cap = cv2.VideoCapture(source)
     length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
   
 
-    lastdiffMag = []
-    full_color = []
-    lastFrame = None
-    
     # Read until video is completed
     for i in range(length):
         ret, frame = cap.read()
@@ -68,3 +68,4 @@ def keyframeDetection(source, Thres):
     return np.array(out)
     
 out = keyframeDetection('DataSet/Videos/acrobacia.mp4', 0.5)
+x=0
