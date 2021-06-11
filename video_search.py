@@ -66,9 +66,9 @@ def video_search(path,conn,method):
         #c.execute(sql) 
         #rows = c.fetchall()
 
-path1='DataSet/Videos/acrobacia.mp4'
-conn=sqlite3.connect("multimedia.db")
-#c= conn.cursor()
-videopath=video_search(path1,conn,"RGB_MEAN")
-print(videopath)
+# path1='DataSet/Videos/acrobacia.mp4'
+# conn=sqlite3.connect("multimedia.db")
+# #c= conn.cursor()
+# videopath=video_search(path1,conn,"RGB_MEAN")
+# print(videopath)
         
