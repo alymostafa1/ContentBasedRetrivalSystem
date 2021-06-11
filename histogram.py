@@ -44,10 +44,10 @@ def Compare_Histo(hist_base, hist_test1):  # Function that compares the histogra
         return 0, base_test1
 
 
-def main():     #Made for testing the algorithm
-    src = cv2.imread("C:/Users/Aly EL-kady/Desktop/image.JPG")  #source image that we need to find similar images to it
+# def main():     #Made for testing the algorithm
+#    src = cv2.imread("C:/Users/Aly EL-kady/Desktop/image.JPG")  #source image that we need to find similar images to it
 #     Allimages = Read_All_Images('DataSet/Images')
-    histsrc = hist_computation(src)
+#    histsrc = hist_computation(src)
 
      # for image in Allimages:  # loop to compare all images in the dataset with the source image
      #    histvalues.append(hist_computation(image))
@@ -63,5 +63,5 @@ def main():     #Made for testing the algorithm
 #         cv.waitKey()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

@@ -67,5 +67,5 @@ def keyframeDetection(source, Thres):
     cv2.destroyAllWindows()
     return np.array(out)
     
-out = keyframeDetection('DataSet/Videos/acrobacia.mp4', 0.5)
-x=0
+# out = keyframeDetection('DataSet/Videos/acrobacia.mp4', 0.5)
+# x=0
