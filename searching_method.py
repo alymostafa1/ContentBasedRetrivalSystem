@@ -56,10 +56,10 @@ def ImageSearch (path,conn,method):
     for i, val in enumerate(vals1):
         if method == "RGB_MEAN":
             Val, diff = RGBcompare(val , vals2)
-            if (Val):
-                if (diff < min(diffL)):
-                    diffL.append(diff)
-                    img_path=table_img[i][1]
+            # if (Val):
+            if (diff < min(diffL)):
+                diffL.append(diff)
+                img_path=table_img[i][1]
             
         if method == "Histogram":
             diff = Compare_Histo(val, vals2)            
@@ -81,7 +81,7 @@ def ImageSearch (path,conn,method):
     return img_path
 
 
-# path=r'C:\Users\Aly EL-kady\Desktop\IMG_4161.jpg'
+# path=r'H:\kolya\4th year\2nd Term\Multimedia\Images/40-200x300.jpg'
 
 # conn=sqlite3.connect("multimedia.db")
 # print(ImageSearch(path,conn,"SLiced-Histogram")) 
