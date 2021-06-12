@@ -34,6 +34,6 @@ if videos we insert two tables: 1- video id and path
 
 
 ##user Screenshot
-![User](C:\Users\My Lap\Desktop\New folder\screenshots\user.PNG)
+![User](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/user.PNG)
 
 
