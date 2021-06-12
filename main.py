@@ -25,8 +25,10 @@ class GUI:
                              height=2, bg='grey', fg='black', command=self.UseropenNewWindow)
         self.button.pack(pady=30)
         Button(text='Quit', bg='black', fg='white', width=15,
-               command=lambda: quit()).pack(pady=10)
-        self.conn = create_db('multimedia.db')
+               command=root.destroy).pack(pady=10)
+        Button(text='Clear Database', bg='black', fg='white', width=15,
+               command=self.clearDB).pack(pady=10)
+        self.conn = sqlite3.connect('multimedia.db')
         c = self.conn.cursor()
         self.n = StringVar()
         self.L = StringVar()
@@ -35,7 +37,11 @@ class GUI:
         self.InsertsearchImage = StringVar()
         self.InsertImgs = StringVar()
         self.InsertVideos = StringVar()
-
+    
+    def clearDB(self):
+        clear_db(self.conn)
+        self.conn = create_db('multimedia.db')
+    
     def VgetPath(self):
         m = self.InsertVideos.get()
         return m

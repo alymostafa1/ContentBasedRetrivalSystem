@@ -6,6 +6,15 @@ from CBIR_Hist import *
 from CBIR_Layout import * # Histo Agent 007
 from searching_method import *
 
+def clear_db(conn):
+    c = conn.cursor() # The database will be saved in the location where your 'py' file is saved
+    c.execute("DELETE FROM IMG")
+    c.execute("DELETE FROM SLICES")
+    c.execute("DELETE FROM VIDEO")
+    c.execute("DELETE FROM KEYFRAMES")
+    conn.commit()
+    
+    
 def create_db(name):
     conn = sqlite3.connect(name)  # You can create a new database by changing the name within the quotes
     c = conn.cursor() # The database will be saved in the location where your 'py' file is saved
