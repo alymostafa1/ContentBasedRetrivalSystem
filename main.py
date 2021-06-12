@@ -7,7 +7,6 @@ from numpy.lib.arraypad import pad
 from db_insert import *
 import sqlite3
 from searching_method import *
-from searching_method import *
 
 
 class GUI:
