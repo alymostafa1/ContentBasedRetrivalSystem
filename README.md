@@ -29,4 +29,11 @@ if videos we insert two tables: 1- video id and path
 "take the image and if the user chose RGB will get the RGB values for the image and then call search function to search for this image in the database and get the best match for it"
 1.the result will appear 
 
+##Admin Screenshot
+![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\admin.png)
+
+
+##user Screenshot
+![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\user.png)
+
 
