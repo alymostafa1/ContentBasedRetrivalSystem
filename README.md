@@ -40,7 +40,7 @@ if videos we insert two tables:
 
 
 ## User Screenshot
-![User](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/user.PNG)
+![User](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/user1.PNG)
 
 
 
