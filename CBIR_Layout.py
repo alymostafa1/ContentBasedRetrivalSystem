@@ -1,9 +1,10 @@
 import cv2  
 import numpy as np
+from CBIR_Hist import *
 
 
 # from histogram import *
-from Img_Ret import *
+from CBIR_Layout import *
 
 def sliceImage_Vect(Image_path,divisions):
 

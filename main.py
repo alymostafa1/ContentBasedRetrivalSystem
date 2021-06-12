@@ -4,10 +4,10 @@ from tkinter import *
 from tkinter import ttk
 import cv2
 from numpy.lib.arraypad import pad
-from db_insert import insert_images, insert_videos, create_db
+from db_insert import *
 import sqlite3
 from searching_method import *
-from video_search import *
+from searching_method import *
 
 
 class GUI:

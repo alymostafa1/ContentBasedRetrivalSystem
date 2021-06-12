@@ -1,10 +1,10 @@
 import sqlite3
 import os
-from RGB_CBIR import *
+from CBIR_RGB import *
 from CBVR import *
-from Img_Ret import * # Histo Agent 007
-from Img_Slicer import *
-from helper_Function import *
+from CBIR_Hist import *
+from CBIR_Layout import * # Histo Agent 007
+from searching_method import *
 
 def create_db(name):
     conn = sqlite3.connect(name)  # You can create a new database by changing the name within the quotes
