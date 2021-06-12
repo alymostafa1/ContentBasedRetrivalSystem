@@ -4,8 +4,8 @@ consisted of:
 Content-based image retrieval system
 ##
 Content-based video retrieval system
-##  implementation
-##frontend
+##  Implementation
+## frontend
 GUI, has to choose user or admin then if you are an admin you will insert the database and he can check if the database is inserted or not.
 if you are a user you will choose image or video
 if image:
@@ -13,7 +13,7 @@ will insert the path of the image and choose the method (RGB- histogram -Sliced 
 if video:
 will insert the path of the video and choose the method (RGB- histogram )
 
-## backend 
+## Backend 
 
 implementation of database insertion whether videos or images, comparison methods between database images and the input images & search methods to get the best match 
 
@@ -23,7 +23,7 @@ if videos we insert two tables:
 1- video id and path
 2-video id, path & keyframes
 
-## Sequence
+## User guide:
 
 1. open GUI
 ##
