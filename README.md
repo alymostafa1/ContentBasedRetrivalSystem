@@ -30,10 +30,10 @@ if videos we insert two tables: 1- video id and path
 1.the result will appear 
 
 ##Admin Screenshot
-![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\admin.png)
+![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\admin.PNG)
 
 
 ##user Screenshot
-![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\user.png)
+![alt text](C:\Users\My Lap\Desktop\New folder\screenshots\user.PNG)
 
 
