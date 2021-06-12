@@ -29,11 +29,11 @@ if videos we insert two tables: 1- video id and path
 "take the image and if the user chose RGB will get the RGB values for the image and then call search function to search for this image in the database and get the best match for it"
 1.the result will appear 
 
-##Admin Screenshot
+## Admin Screenshot
 ![Admin](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/admin.PNG)
 
 
-##user Screenshot
+## user Screenshot
 ![User](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/user.PNG)
 
 
