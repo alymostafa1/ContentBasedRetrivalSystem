@@ -126,7 +126,8 @@ def ImageSearch (path,conn,method):
     diffL=[10000]    
     diffL_2=[0]  
     diffL_3=[]
-    image = cv2.imread(path)        
+    img = cv2.imread(path)
+    image = cv2.resize(img, (200,200), interpolation = cv2.INTER_AREA)        
     c=conn.cursor()
     c.execute("SELECT * FROM IMG")
     table_img=c.fetchall()

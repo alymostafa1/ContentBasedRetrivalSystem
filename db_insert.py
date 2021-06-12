@@ -50,7 +50,8 @@ def insert_images(path, conn):
     images = os.listdir(path)
     for i in range(len(images)):
         img_path = path + '/' + images[i]
-        image = cv2.imread(img_path)
+        img = cv2.imread(img_path)
+        image = cv2.resize(img, (200,200), interpolation = cv2.INTER_AREA)
         avg_rgb = RGB_MEAN(image)
         histo = hist_computation(image)
         str_hist = histo
