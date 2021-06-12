@@ -40,7 +40,8 @@ def video_search(path,conn,method):
     
     elif method=="HIST":
         in_histo=np.zeros((len(in_keyframes),256))
-        diff=np.zeros((numOfvideos,1))
+        diff=np.zeros((numOfvideos,len(in_keyframes)))
+        fdiff=np.zeros((numOfvideos,1))
         for i in range(len(in_keyframes)):
             in_histo[i] = hist_computation(in_keyframes[i]) ############hist input video
             
@@ -52,9 +53,15 @@ def video_search(path,conn,method):
             for h in range(len(t)):
                 db_histo[h]=stringToList(t[h][0]) ############histo video[i] in db
             for j in range(len(in_keyframes)):
-                diff[i]= np.min(abs(np.mean((in_histo[j]-db_histo),axis=1)))
+                temp=0
+                for k in range(len(t)):
+                    correlation = Compare_Histo(in_histo[j], db_histo[k])
+                    if correlation>temp and correlation>0.6:
+                        temp=correlation
+                diff[i,j]=temp       
+        fdiff=np.mean(diff,axis=1)    
                     
-        video_index=np.argmin(diff)
+        video_index=np.argmax(fdiff)
         #c.execute("SELECT path FROM VIDEO as V WHERE V.id='%d'"% (video_index))
         c.execute("SELECT * FROM VIDEO")
         t= c.fetchall()
@@ -66,9 +73,9 @@ def video_search(path,conn,method):
         #c.execute(sql) 
         #rows = c.fetchall()
 
-# path1='DataSet/Videos/acrobacia.mp4'
-# conn=sqlite3.connect("multimedia.db")
-# #c= conn.cursor()
-# videopath=video_search(path1,conn,"RGB_MEAN")
-# print(videopath)
+#path1=r'D:\ContentBasedRetrivalSystem\DataSet\Videos\skating.mp4'
+#conn=sqlite3.connect("multimedia.db")
+#c= conn.cursor()
+#videopath=video_search(path1,conn,"HIST")
+#print(videopath)
         
