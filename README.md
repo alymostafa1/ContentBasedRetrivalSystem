@@ -22,12 +22,12 @@ if videos we insert two tables: 1- video id and path
 
 ## Sequence
 
-1.open GUI
-1.choose admin or user
-1.if admin insert path of a folder of images or videos "calling database functions to insert the Infos"
-1.if user insert the path of video or image and the method you want to search 
+1. open GUI
+1. choose admin or user
+1. if admin insert path of a folder of images or videos "calling database functions to insert the Infos"
+1. if user insert the path of video or image and the method you want to search 
 "take the image and if the user chose RGB will get the RGB values for the image and then call search function to search for this image in the database and get the best match for it"
-1.the result will appear 
+1. the result will appear 
 
 ## Admin Screenshot
 ![Admin](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/admin.PNG)
