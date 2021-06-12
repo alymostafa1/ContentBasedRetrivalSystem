@@ -30,7 +30,7 @@ if videos we insert two tables: 1- video id and path
 1.the result will appear 
 
 ##Admin Screenshot
-![Admin](C:\Users\My Lap\Desktop\New folder\screenshots\admin.PNG)
+![Admin](https://github.com/alymostafa1/ContentBasedRetrivalSystem/blob/main/screenshots/admin.PNG)
 
 
 ##user Screenshot
